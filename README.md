@@ -3,7 +3,7 @@ Screen gesture recognition refers to the process of identifying and interpreting
 
 ## Demo 
 ![Screenshot of the UI](./screenshots/Screenshot%202023-05-02%20144514.png)
-![Screenshot of the chart](./screenshots/temp_prediction_percentages.png)
+![Screenshot of the chart](./screenshots/prediction_percentages.png)
 
 ## How to use 
 - Write the gesture on the screen using your mouse/finger. After save the gesture using the save button.
