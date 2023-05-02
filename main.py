@@ -31,6 +31,7 @@ def run_prediction(grid: Grid, label: UILabel) -> None:
 
     label.set_text(f'The guesture predicted is: {prediction}')
 
+
 def main():
     pygame.init()
     SCREEN_WIDTH, SCREEN_HEIGHT = 600, 600

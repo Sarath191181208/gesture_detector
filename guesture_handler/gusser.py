@@ -8,6 +8,29 @@ import numpy as np
 from grid import Point
 from save_load_points import load_points
 
+import matplotlib
+import matplotlib.pyplot as plt
+matplotlib.use('Agg')  # Use the 'Agg' backend
+
+from PIL import Image
+
+def plot_prediction_percentages(pred_perct: Dict[str, np.ndarray]) -> None:
+    """ Plots the prediction percentages """
+    gesture_labels = list(pred_perct.keys())
+    prediction_percentages: list[float] = list(pred_perct.values())
+    # start the axis at min + 0.1 
+
+    plt.bar(gesture_labels, prediction_percentages)
+    plt.ylim( min(prediction_percentages) - 0.1 )
+    plt.xlabel('Gesture')
+    plt.ylabel('Prediction Percentage')
+
+    # This is used so that the matplot lib doesn't shrink the pygame window
+    plt.savefig('temp_prediction_percentages.png')
+    # show the image using python default library 
+    img = Image.open('temp_prediction_percentages.png')
+    img.show()
+
 
 def load_all_gestures() -> Dict[ str, List[Point]]:
     """ Loads all the gestures saved in ./guestures """
@@ -24,11 +47,9 @@ def predict(gesture: List[Point]) -> str:
     guestures = load_all_gestures()
     score_dict = {}
     for name, points in guestures.items():
-        sc = score(points, gesture)
-        print(sc)
-        score_dict[name] = sc
-    
-    print(score_dict)
+        score_dict[name] = score(points, gesture)
+
+    plot_prediction_percentages(score_dict)
     return max(score_dict, key= lambda key: score_dict[key] )
 
 def score(p1: List[Point], p2: List[Point]) -> float:
@@ -40,10 +61,14 @@ def score(p1: List[Point], p2: List[Point]) -> float:
     elif len(p2) > len(p1):
         p1 += [(0, 0)] * (len(p2) - len(p1))
 
-    A = np.array(p1)
-    B = np.array(p2)
+    # calculate the score using dot product
+    # score = 0
+    # for i in range(len(p1)):
+    #     score += p1[i][0] * p2[i][0] + p1[i][1] * p2[i][1]
+    # return score
 
-    print("Arrya shape", A.shape, B.shape)
+    A = np.array(p1).reshape(1, -1)
+    B = np.array(p2).reshape(1, -1)
 
-    # calculate distance using cosine similarity
-    return np.dot(A, B.T) / (np.linalg.norm(A) * np.linalg.norm(B))
+    # cosine similarity
+    return (np.dot(A, B.T) / (np.linalg.norm(A) * np.linalg.norm(B)))[0][0] # unpacking to make it a float
