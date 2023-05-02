@@ -2,7 +2,8 @@
 Screen gesture recognition refers to the process of identifying and interpreting hand or finger movements performed on a screen or touchpad. It has numerous applications, including touch-based user interfaces, virtual reality, gaming, and interactive presentations. Wondering, how it's done I have created a simple hand gesture recognition model using `maths`, `Python` and `pygame`.
 
 ## Demo 
-![Screenshot of the UI](./screenshots/)
+![Screenshot of the UI](./screenshots/Screenshot%202023-05-02%20144514.png)
+![Screenshot of the chart](./screenshots/temp_prediction_percentages.png)
 
 ## How to use 
 - Write the gesture on the screen using your mouse/finger. After save the gesture using the save button.
