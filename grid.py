@@ -121,8 +121,11 @@ class Grid():
         if pygame.mouse.get_pressed()[0]:
             cube = self.click()
             if cube is not None:
-                cube.value = CubeState.FILLED
-                cube.draw() 
+                for i in range(cube.row-1, cube.row+2):
+                    for j in range(cube.col-1, cube.col+2):
+                        if i >= 0 and i < self.rows and j >= 0 and j < self.cols:
+                            self[i,j].value = CubeState.FILLED
+                            self[i,j].draw()
         self.draw()
 
     def __getitem__(self, pos:tuple[int, int])-> Cube:
