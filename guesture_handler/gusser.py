@@ -20,6 +20,10 @@ def plot_prediction_percentages(pred_perct: Dict[str, np.ndarray]) -> None:
     prediction_percentages: list[float] = list(pred_perct.values())
     # start the axis at min + 0.1 
 
+    # clear the graph before drawing 
+    plt.cla()
+
+    # draw the graph
     plt.bar(gesture_labels, prediction_percentages)
     plt.ylim( min(prediction_percentages) - 0.1 )
     plt.xlabel('Gesture')
